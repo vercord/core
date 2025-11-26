@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { ZodError } from "zod/v4";
 
 import HttpStatusCode from "@/enums/http-status-codes";
@@ -35,7 +36,7 @@ export async function POST(req: Request) {
     const webhook = webhookSchema.parse(payload);
 
     const embed = createMessageFromWebhook(webhook);
-    await sendDiscordNotification(embed);
+    after(() => sendDiscordNotification(embed));
 
     return Response.json({ success: true, message: "Webhook processed" });
   } catch (error) {
