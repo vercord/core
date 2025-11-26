@@ -1,0 +1,49 @@
+"use client";
+
+import { BookOpen, Github } from "lucide-react";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { githubUrl } from "@/lib/metadata";
+
+export function Hero() {
+  return (
+    <div className="mx-auto flex max-w-md flex-col items-center justify-center gap-6 px-2 text-center sm:max-w-2xl sm:gap-8 sm:px-4">
+      <div className="space-y-4">
+        <h1 className="font-bold text-2xl text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
+          Connect{" "}
+          <span className="font-bold text-black transition-all duration-300 hover:drop-shadow-md dark:text-white dark:hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">
+            Vercel
+          </span>{" "}
+          to{" "}
+          <span className="font-bold text-[#5865F2] transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(88,101,242,0.5)]">
+            Discord
+          </span>
+        </h1>
+        <p className="mx-auto max-w-lg text-base text-muted-foreground sm:text-lg">
+          Seamlessly integrate your Vercel deployment notifications with
+          Discord. Stay updated on every deployment status in real-time.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+        <Button asChild className="group w-full sm:w-auto">
+          <Link href="/docs">
+            Getting Started
+            <BookOpen className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5 sm:h-5 sm:w-5" />
+          </Link>
+        </Button>
+        <Button
+          asChild
+          className="group w-full sm:w-auto"
+          variant="primary-outline"
+        >
+          <Link href={githubUrl} rel="noopener noreferrer" target="_blank">
+            View on GitHub
+            <Github className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-12 sm:h-5 sm:w-5" />
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+}

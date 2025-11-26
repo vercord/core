@@ -1,0 +1,142 @@
+import type { WebhookType } from "@/schemas/vercel";
+import type { StateProperty } from "@/types/discord";
+
+export const DEFAULT_AVATAR_URL =
+  "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" as const;
+
+export const COLORS = {
+  PROMOTED: 0xd9_98_e3, // Bright purple
+  SUCCESS: 0x2e_cc_71, // Bright green
+  ERROR: 0xe7_4c_3c, // Bright red
+  CANCELED: 0x95_a5_a6, // Light gray
+  INFO: 0x34_98_db, // Bright blue
+  PENDING: 0xf1_c4_0f, // Bright yellow,
+  WARNING: 0xff_98_00, // Orange for warnings
+  REFUNDED: 0x60_7d_8b, // Blue gray
+  PAID: 0x4c_af_50, // Green for payments
+  CONNECTED: 0x21_96_f3, // Blue for connections
+  DISCONNECTED: 0xf4_43_36, // Red for disconnections
+  CREATED: 0x8b_c3_4a, // Light green for creations
+  REMOVED: 0xff_57_22, // Deep orange for removals
+  UPGRADED: 0x9c_27_b0, // Purple for upgrades
+  CONFIRMED: 0x00_bc_d4, // Cyan for confirmations
+} as const;
+
+export const EMOJIS = {
+  PROMOTED: "🔗",
+  SUCCESS: "✅",
+  ERROR: "❌",
+  CANCELED: "🚫",
+  PENDING: "⏳",
+  BRANCH: "🌿",
+  COMMIT: "📝",
+  PROJECT: "📦",
+  DEPLOY: "🚀",
+  REFRESH: "🔄", // For check-rerequested
+  CLEANUP: "🧹", // For cleanup actions
+  DOMAIN: "🌐", // For domain events
+  UPGRADE: "🔼", // For permission upgrades
+  DISCONNECT: "🔌", // For removing/disconnecting
+  CONFIRM: "✅", // For confirmations
+  CONNECT: "🔗", // For connections
+  UNLOCK: "🔓", // For disconnections
+  INVOICE: "📝", // For invoice created
+  WARNING: "⚠️", // For not paid
+  PAYMENT: "💵", // For paid
+  MONEY: "💸", // For refunded
+  NEW: "🆕", // For created
+  TRASH: "🗑️", // For removed
+  ENV: "🔗", // For environment
+  URL: "🌐", // For URLs
+  MESSAGE: "💬", // For commit messages
+} as const;
+
+/**
+ * Maps webhook types to their corresponding state properties (colors, emojis)
+ */
+export function getStateProperty(
+  type: WebhookType,
+  property: StateProperty
+): number | string {
+  const mappings = {
+    color: {
+      // Deployment events
+      "deployment.created": COLORS.PENDING,
+      "deployment.succeeded": COLORS.SUCCESS,
+      "deployment.ready": COLORS.SUCCESS,
+      "deployment.promoted": COLORS.PROMOTED,
+      "deployment.error": COLORS.ERROR,
+      "deployment.canceled": COLORS.CANCELED,
+      "deployment.check-rerequested": COLORS.INFO,
+      "deployment.integration.action.start": COLORS.PENDING,
+      "deployment.integration.action.cancel": COLORS.CANCELED,
+      "deployment.integration.action.cleanup": COLORS.INFO,
+
+      // Domain events
+      "domain.created": COLORS.SUCCESS,
+
+      // Integration configuration events
+      "integration-configuration.permission-upgraded": COLORS.UPGRADED,
+      "integration-configuration.removed": COLORS.ERROR,
+      "integration-configuration.scope-change-confirmed": COLORS.CONFIRMED,
+
+      // Integration resource events
+      "integration-resource.project-connected": COLORS.CONNECTED,
+      "integration-resource.project-disconnected": COLORS.DISCONNECTED,
+
+      // Marketplace events
+      "marketplace.invoice.created": COLORS.INFO,
+      "marketplace.invoice.notpaid": COLORS.WARNING,
+      "marketplace.invoice.paid": COLORS.PAID,
+      "marketplace.invoice.refunded": COLORS.REFUNDED,
+
+      // Project events
+      "project.created": COLORS.CREATED,
+      "project.removed": COLORS.REMOVED,
+
+      default: COLORS.INFO,
+    },
+    emoji: {
+      // Deployment events
+      "deployment.created": EMOJIS.PENDING,
+      "deployment.succeeded": EMOJIS.SUCCESS,
+      "deployment.ready": EMOJIS.SUCCESS,
+      "deployment.promoted": EMOJIS.PROMOTED,
+      "deployment.error": EMOJIS.ERROR,
+      "deployment.canceled": EMOJIS.CANCELED,
+      "deployment.check-rerequested": EMOJIS.REFRESH,
+      "deployment.integration.action.start": EMOJIS.PENDING,
+      "deployment.integration.action.cancel": EMOJIS.CANCELED,
+      "deployment.integration.action.cleanup": EMOJIS.CLEANUP,
+
+      // Domain events
+      "domain.created": EMOJIS.DOMAIN,
+
+      // Integration configuration events
+      "integration-configuration.permission-upgraded": EMOJIS.UPGRADE,
+      "integration-configuration.removed": EMOJIS.DISCONNECT,
+      "integration-configuration.scope-change-confirmed": EMOJIS.CONFIRM,
+
+      // Integration resource events
+      "integration-resource.project-connected": EMOJIS.CONNECT,
+      "integration-resource.project-disconnected": EMOJIS.UNLOCK,
+
+      // Marketplace events
+      "marketplace.invoice.created": EMOJIS.INVOICE,
+      "marketplace.invoice.notpaid": EMOJIS.WARNING,
+      "marketplace.invoice.paid": EMOJIS.PAYMENT,
+      "marketplace.invoice.refunded": EMOJIS.MONEY,
+
+      // Project events
+      "project.created": EMOJIS.NEW,
+      "project.removed": EMOJIS.TRASH,
+
+      default: EMOJIS.DEPLOY,
+    },
+  };
+
+  return (
+    mappings[property][type as keyof (typeof mappings)[typeof property]] ||
+    mappings[property].default
+  );
+}
