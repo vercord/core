@@ -39,7 +39,7 @@ export default async function Page(props: PageProps) {
         <div className="flex flex-row items-center gap-2 border-b pt-2 pb-6">
           <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
           <ViewOptions
-            githubUrl={`https://github.com/vercord/core/blob/dev/apps/docs/content/docs/${page.path}`}
+            githubUrl={`https://github.com/vercord/core/blob/master/apps/fumadocs/content/docs/${page.path}`}
             markdownUrl={`${page.url}.mdx`}
           />
         </div>
