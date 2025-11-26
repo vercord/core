@@ -9,7 +9,7 @@ export default function Home() {
         {/* Status indicator */}
         <div className="flex items-center gap-2 text-emerald-500">
           <CheckCircle2 className="size-5" />
-          <span className="font-medium text-sm">Running</span>
+          <span className="font-medium text-sm">Online</span>
         </div>
 
         {/* Title */}
@@ -18,35 +18,31 @@ export default function Home() {
         </h1>
 
         {/* Description */}
-        <p className="max-w-sm text-muted-foreground">
-          Webhook relay active. Configure Vercel to send events to{" "}
-          <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-foreground text-xs">
-            /api/hook
-          </code>
+        <p className="max-w-xs text-muted-foreground">
+          Vercel deployment notifications in Discord. Deploy your own in
+          minutes.
         </p>
 
-        {/* Links */}
-        <div className="flex items-center gap-4 pt-2 text-sm">
-          <Link
-            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-            href="https://docs.vercord.lol"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Docs
-            <ExternalLink className="size-3.5" />
-          </Link>
-          <span className="text-border">•</span>
-          <Link
-            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-            href="https://github.com/vercord/core"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            GitHub
-            <ExternalLink className="size-3.5" />
-          </Link>
-        </div>
+        {/* CTA */}
+        <Link
+          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 font-medium text-background text-sm transition-colors hover:bg-foreground/90"
+          href="https://docs.vercord.lol"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Get Started
+          <ExternalLink className="size-3.5" />
+        </Link>
+
+        {/* Source link */}
+        <Link
+          className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+          href="https://github.com/vercord/core"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          View source on GitHub
+        </Link>
       </div>
 
       <Footer />
