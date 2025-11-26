@@ -5,7 +5,13 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", ".next/**"],
+      "env": [
+        "WEBHOOK_INTEGRATION_SECRET",
+        "DISCORD_WEBHOOK_URL",
+        "UPSTASH_REDIS_REST_URL",
+        "UPSTASH_REDIS_REST_TOKEN"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
