@@ -36,6 +36,12 @@ export default async function Page(props: PageProps) {
           })}
         />
 
+        {page.data.lastModified && (
+          <p className="text-muted-foreground text-sm">
+            Updated: {page.data.lastModified.toLocaleDateString()}
+          </p>
+        )}
+
         <div className="flex flex-row items-center gap-2 border-b pt-2 pb-6">
           <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
           <ViewOptions
