@@ -1,0 +1,50 @@
+---
+title: Environment
+description: How to setup environment variables for Vercord
+icon: Settings
+---
+
+import { TypeTable } from 'fumadocs-ui/components/type-table';
+
+# Environment Variables
+
+These are the environment variables you need to set at your Vercord instance in
+Vercel for it to work
+
+<TypeTable
+  type={{
+    WEBHOOK_INTEGRATION_SECRET: {
+      description: 'The secret for the Vercel webhook integration',
+      type: 'string',
+      default: 'your-secret',
+      required: true
+    },
+    DISCORD_WEBHOOK_URL: {
+      description: 'The URL for the Discord webhook integration',
+      type: 'string',
+      default: 'https://discord.com/api/webhooks/<id>/<token>',
+      required: true
+    },
+    DISCORD_WEBHOOK_USERNAME: {
+      description: 'The username for the Discord webhook',
+      type: 'string',
+      default: 'Vercord',
+      required: false
+    },
+    DISCORD_WEBHOOK_AVATAR_URL: {
+      description: 'The avatar URL for the Discord webhook',
+      type: 'string',
+      default: 'https://vercord.dev/logo.jpg',
+      required: false
+    }
+  }}
+/>
+
+## Security Considerations
+
+- Store your webhook secret securely with a unique value for each integration
+- All incoming webhooks are validated using HMAC-SHA1 signatures
+- Webhook payloads are validated against a strict schema to ensure data
+  integrity
+
+Then just redeploy your Vercord instance and you're done!

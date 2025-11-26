@@ -1,0 +1,60 @@
+---
+title: Setup Vercel
+description: How to setup Vercel for Vercord
+icon: Check
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
+# Setup Vercel
+
+<Steps>
+<Step>
+
+### Access Vercel Dashboard
+
+Sign in to your account and navigate to the
+[Vercel Dashboard](https://vercel.com/dashboard) to manage your projects.
+
+</Step>
+
+<Step>
+
+### Navigate to Project Settings
+
+Click on the **Settings** tab in the navigation menu.
+
+</Step>
+
+<Step>
+
+### Access Webhooks Section
+
+In the left sidebar of your project settings, locate and click on the
+**Webhooks** option.
+
+</Step>
+
+<Step>
+
+### Configure New Webhook
+
+Click the **Create Webhook** button and configure your webhook with:
+
+- **URL**: `https://<your-deployed-url>/api/vercel-webhook`
+- Choose which events should trigger the webhook.
+
+</Step>
+
+<Step>
+
+### Save Your Secret
+
+Click **Create Webhook** to save your webhook configuration.
+
+<Callout>
+  Save the secret that Vercel provides you, you will need it for later.
+</Callout>
+
+</Step>
+</Steps>
