@@ -8,9 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "vercord",
-  description:
-    "Seamlessly integrate your Vercel deployment notifications with Discord.",
+  title: "vercord docs",
+  description: "Documentation for vercord.",
 };
 
 export default function Layout({ children }: LayoutProps<"/">) {
