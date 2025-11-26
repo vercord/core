@@ -1,11 +1,13 @@
 import { CheckCircle2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { Footer } from "@/components/core/footer";
+import { LightRays } from "@/components/ui/light-rays";
 
 export default function Home() {
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center p-4">
-      <div className="flex flex-col items-center gap-6 text-center">
+    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden p-4">
+      <LightRays />
+      <div className="relative flex flex-col items-center gap-6 text-center">
         {/* Status indicator */}
         <div className="flex items-center gap-2 text-emerald-500">
           <CheckCircle2 className="size-5" />

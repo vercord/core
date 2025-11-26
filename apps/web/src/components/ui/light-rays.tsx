@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "motion/react";
 import { type CSSProperties, useEffect, useState } from "react";
 
