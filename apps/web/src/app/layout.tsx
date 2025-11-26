@@ -1,8 +1,7 @@
+import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../index.css";
-import Header from "@/components/header";
-import Providers from "@/components/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "vercord-recode",
-  description: "vercord-recode",
+  title: "vercord",
+  description:
+    "Seamlessly integrate your Vercel deployment notifications with Discord.",
 };
 
 export default function RootLayout({
@@ -30,10 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <div className="grid h-svh grid-rows-[auto_1fr]">
-            <Header />
-            {children}
-          </div>
+          <div className="grid h-svh grid-rows-[auto_1fr]">{children}</div>
         </Providers>
       </body>
     </html>
