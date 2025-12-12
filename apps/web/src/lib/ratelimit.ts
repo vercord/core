@@ -27,8 +27,19 @@ const isRateLimitingEnabled = (): boolean => {
 };
 
 let ratelimit: Ratelimit | null = null;
+let rateLimitingEnabled: boolean | null = null;
 
-if (isRateLimitingEnabled()) {
+const getRatelimit = (): Ratelimit | null => {
+  if (rateLimitingEnabled === null) {
+    rateLimitingEnabled = isRateLimitingEnabled();
+  }
+  if (!rateLimitingEnabled) {
+    return null;
+  }
+  if (ratelimit) {
+    return ratelimit;
+  }
+
   const redis = new Redis({
     url: env.UPSTASH_REDIS_REST_URL!,
     token: env.UPSTASH_REDIS_REST_TOKEN!,
@@ -38,7 +49,9 @@ if (isRateLimitingEnabled()) {
     redis,
     limiter: Ratelimit.slidingWindow(10, "60 s"),
   });
-}
+
+  return ratelimit;
+};
 
 /**
  * Extracts the client IP from request headers
@@ -60,11 +73,12 @@ export function getClientIp(headers: Headers): string {
 export async function checkRateLimit(
   ip: string
 ): Promise<Response | undefined> {
-  if (!isRateLimitingEnabled() || !ratelimit) {
+  const rateLimiter = getRatelimit();
+  if (!rateLimiter) {
     return;
   }
 
-  const { success, reset } = await ratelimit.limit(ip);
+  const { success, reset } = await rateLimiter.limit(ip);
 
   if (!success) {
     return new Response(
