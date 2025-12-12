@@ -4,15 +4,41 @@ import { Redis } from "@upstash/redis";
 import HttpStatusCode from "@/enums/http-status-codes";
 import { env } from "@/env";
 
-const redis = new Redis({
-  url: env.UPSTASH_REDIS_REST_URL,
-  token: env.UPSTASH_REDIS_REST_TOKEN,
-});
+const isRateLimitingEnabled = (): boolean => {
+  // Explicitly disabled
+  if (env.ENABLE_RATE_LIMITING === false) {
+    return false;
+  }
 
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(10, "60 s"),
-});
+  // Check if Upstash vars are available
+  const hasUpstashConfig =
+    env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN;
+
+  // If explicitly enabled but vars missing, throw error
+  if (env.ENABLE_RATE_LIMITING === true && !hasUpstashConfig) {
+    throw new Error(
+      "Rate limiting is enabled but UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are required"
+    );
+  }
+
+  // Auto-enable if vars are present and not explicitly disabled
+  // Or explicitly enabled with vars present
+  return hasUpstashConfig && env.ENABLE_RATE_LIMITING !== false;
+};
+
+let ratelimit: Ratelimit | null = null;
+
+if (isRateLimitingEnabled()) {
+  const redis = new Redis({
+    url: env.UPSTASH_REDIS_REST_URL!,
+    token: env.UPSTASH_REDIS_REST_TOKEN!,
+  });
+
+  ratelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, "60 s"),
+  });
+}
 
 /**
  * Extracts the client IP from request headers
@@ -34,6 +60,10 @@ export function getClientIp(headers: Headers): string {
 export async function checkRateLimit(
   ip: string
 ): Promise<Response | undefined> {
+  if (!isRateLimitingEnabled() || !ratelimit) {
+    return;
+  }
+
   const { success, reset } = await ratelimit.limit(ip);
 
   if (!success) {
