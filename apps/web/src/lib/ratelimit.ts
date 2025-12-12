@@ -5,14 +5,15 @@ import HttpStatusCode from "@/enums/http-status-codes";
 import { env } from "@/env";
 
 const isRateLimitingEnabled = (): boolean => {
+  // Check if Upstash vars are available
+  const hasUpstashConfig = Boolean(
+    env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN
+  );
+
   // Explicitly disabled
   if (env.ENABLE_RATE_LIMITING === false) {
     return false;
   }
-
-  // Check if Upstash vars are available
-  const hasUpstashConfig =
-    env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN;
 
   // If explicitly enabled but vars missing, throw error
   if (env.ENABLE_RATE_LIMITING === true && !hasUpstashConfig) {
@@ -23,7 +24,16 @@ const isRateLimitingEnabled = (): boolean => {
 
   // Auto-enable if vars are present and not explicitly disabled
   // Or explicitly enabled with vars present
-  return hasUpstashConfig && env.ENABLE_RATE_LIMITING !== false;
+  if (!hasUpstashConfig) {
+    return false;
+  }
+
+  // At this point, hasUpstashConfig is true
+  // Return true if not explicitly disabled (undefined or true)
+  if (env.ENABLE_RATE_LIMITING === true || env.ENABLE_RATE_LIMITING === undefined) {
+    return true;
+  }
+  return false;
 };
 
 let ratelimit: Ratelimit | null = null;
