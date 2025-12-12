@@ -10,4 +10,8 @@ Before setting up Vercord, make sure you have:
 
 1. A **Vercel account** with at least one project you want to monitor
 2. A **Discord server** where you have "Manage Webhooks" permission
-3. An **Upstash account** for rate limiting (free tier works fine)
+3. (Recommended) An **Upstash account** for rate limiting (free tier works fine)
+
+<Callout type="warn">
+  Rate limiting is **highly recommended** for production deployments to protect against abuse and DDoS attacks. While technically optional, disabling it exposes your webhook endpoint to security risks. See the [Setup Upstash](/docs/installation/setup-upstash) guide for more information.
+</Callout>

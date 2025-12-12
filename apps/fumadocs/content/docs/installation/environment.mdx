@@ -28,16 +28,6 @@ Go to your Vercord deployment in Vercel → **Settings** → **Environment Varia
       type: 'string',
       required: true,
     },
-    UPSTASH_REDIS_REST_URL: {
-      description: 'Upstash Redis REST URL',
-      type: 'string',
-      required: true,
-    },
-    UPSTASH_REDIS_REST_TOKEN: {
-      description: 'Upstash Redis REST token',
-      type: 'string',
-      required: true,
-    },
     WEBHOOK_INTEGRATION_SECRET: {
       description: 'The signing secret from Vercel webhook',
       type: 'string',
@@ -51,8 +41,34 @@ Go to your Vercord deployment in Vercel → **Settings** → **Environment Varia
 
 ### Add Optional Variables (if desired)
 
+<Callout type="error">
+  **⚠️ Security Warning**: The `ENABLE_RATE_LIMITING` variable controls rate limiting protection. **Do not disable rate limiting** (`ENABLE_RATE_LIMITING=false`) unless you fully understand the security risks:
+
+  - **No protection against abuse**: Malicious actors can spam your webhook endpoint
+  - **DDoS vulnerability**: Your endpoint can be overwhelmed by excessive requests
+  - **Resource exhaustion**: Uncontrolled requests can consume server resources and increase costs
+  - **Discord webhook spam**: Excessive requests could trigger Discord's rate limits or get your webhook disabled
+
+  Rate limiting is **strongly recommended** for all production deployments. Only disable it if you have alternative protection (e.g., Vercel's rate limiting, Cloudflare, or other DDoS mitigation) and understand the implications.
+</Callout>
+
 <TypeTable
   type={{
+    ENABLE_RATE_LIMITING: {
+      description: 'Enable or disable rate limiting. Set to "true" to enable (requires Upstash), "false" to disable (NOT RECOMMENDED - see security warning above), or omit to auto-detect based on Upstash config',
+      type: 'boolean',
+      default: 'Auto-detected',
+    },
+    UPSTASH_REDIS_REST_URL: {
+      description: 'Upstash Redis REST URL (required if rate limiting is enabled)',
+      type: 'string',
+      required: false,
+    },
+    UPSTASH_REDIS_REST_TOKEN: {
+      description: 'Upstash Redis REST token (required if rate limiting is enabled)',
+      type: 'string',
+      required: false,
+    },
     DISCORD_WEBHOOK_USERNAME: {
       description: 'Custom username for the webhook bot',
       type: 'string',
