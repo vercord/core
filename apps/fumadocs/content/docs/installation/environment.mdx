@@ -55,9 +55,9 @@ Go to your Vercord deployment in Vercel → **Settings** → **Environment Varia
 <TypeTable
   type={{
     ENABLE_RATE_LIMITING: {
-      description: 'Enable or disable rate limiting. Set to "true" to enable (requires Upstash), "false" to disable (NOT RECOMMENDED - see security warning above), or omit to auto-detect based on Upstash config',
+      description: 'Disable rate limiting by setting to "false" (NOT RECOMMENDED - see security warning above). If omitted, rate limiting is automatically enabled when Upstash credentials are present.',
       type: 'boolean',
-      default: 'Auto-detected',
+      default: 'Auto-enabled when Upstash config is present',
     },
     UPSTASH_REDIS_REST_URL: {
       description: 'Upstash Redis REST URL (required if rate limiting is enabled)',
