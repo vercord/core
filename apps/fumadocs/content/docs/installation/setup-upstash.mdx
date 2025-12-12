@@ -11,8 +11,14 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 Vercord uses Upstash Redis for rate limiting. Add the credentials and it's enabled. No credentials = no rate limiting.
 
 <Callout type="error">
-  **Skipping this step?**
-  Your webhook endpoint will be unprotected against spam, abuse, and DDoS. Only skip if you have alternative protection (Cloudflare, Vercel Firewall, etc.).
+  **Skipping this step?** Without rate limiting, your webhook endpoint is vulnerable to:
+
+  - **Abuse**: Malicious actors can spam your endpoint
+  - **DDoS**: Your endpoint can be overwhelmed by excessive requests
+  - **Resource exhaustion**: Uncontrolled requests increase costs
+  - **Discord spam**: Excessive requests could get your webhook disabled by Discord
+
+  Only skip if you have alternative protection (Cloudflare, Vercel Firewall, etc.).
 </Callout>
 
 <Steps>
