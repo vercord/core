@@ -7,10 +7,13 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", ".next/**"],
       "env": [
-        "WEBHOOK_INTEGRATION_SECRET",
+        "DISCORD_WEBHOOK_AVATAR_URL",
         "DISCORD_WEBHOOK_URL",
+        "DISCORD_WEBHOOK_USERNAME",
+        "ENABLE_RATE_LIMITING",
+        "UPSTASH_REDIS_REST_TOKEN",
         "UPSTASH_REDIS_REST_URL",
-        "UPSTASH_REDIS_REST_TOKEN"
+        "WEBHOOK_INTEGRATION_SECRET"
       ]
     },
     "lint": {
