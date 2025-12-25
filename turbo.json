@@ -7,11 +7,10 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", ".next/**"],
       "env": [
-        "DISCORD_WEBHOOK_AVATAR_URL",
         "DISCORD_WEBHOOK_URL",
-        "DISCORD_WEBHOOK_USERNAME",
         "TELEGRAM_BOT_TOKEN",
         "TELEGRAM_CHAT_ID",
+        "SLACK_WEBHOOK_URL",
         "UPSTASH_REDIS_REST_TOKEN",
         "UPSTASH_REDIS_REST_URL",
         "WEBHOOK_INTEGRATION_SECRET"

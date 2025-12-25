@@ -1,8 +1,7 @@
 import { Embed } from "@vermaysha/discord-webhook";
 
-import { env } from "@/env";
 import type { Deployment, Links, VercelWebhook } from "@/schemas/vercel";
-import { DEFAULT_AVATAR_URL, EMOJIS, getStateProperty } from "./consts";
+import { BOT_AVATAR, EMOJIS, getStateProperty } from "./consts";
 
 type EmbedCreator = (webhook: VercelWebhook) => Embed;
 
@@ -75,7 +74,7 @@ function createGenericEmbed(webhook: VercelWebhook): Embed {
   );
   embed.setFooter({
     text: `Event ID: ${webhook.id}`,
-    icon_url: env.DISCORD_WEBHOOK_AVATAR_URL || DEFAULT_AVATAR_URL,
+    icon_url: BOT_AVATAR,
   });
 
   return embed;
@@ -94,7 +93,7 @@ function setBasicProperties(
   embed.setTimestamp();
   embed.setAuthor({
     name: "versend.io",
-    icon_url: env.DISCORD_WEBHOOK_AVATAR_URL || DEFAULT_AVATAR_URL,
+    icon_url: BOT_AVATAR,
     url: "https://versend.io",
   });
 }
@@ -181,7 +180,7 @@ function addDeploymentFields(
   if (deployment.id) {
     embed.setFooter({
       text: `Deployment ID: ${deployment.id}`,
-      icon_url: env.DISCORD_WEBHOOK_AVATAR_URL || DEFAULT_AVATAR_URL,
+      icon_url: BOT_AVATAR,
     });
   }
 }

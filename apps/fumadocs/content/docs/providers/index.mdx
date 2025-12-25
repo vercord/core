@@ -13,6 +13,7 @@ Versend supports multiple notification providers. Configure one or many — noti
 | Provider | Status | Description |
 |----------|--------|-------------|
 | [Discord](/docs/providers/discord) | ✅ Stable | Rich embeds with colors, fields, and links |
+| [Slack](/docs/providers/slack) | ✅ Stable | Block Kit messages via incoming webhooks |
 | [Telegram](/docs/providers/telegram) | ✅ Stable | HTML-formatted messages via Bot API |
 
 ## How It Works
@@ -20,6 +21,7 @@ Versend supports multiple notification providers. Configure one or many — noti
 Each provider is **auto-enabled** when its required environment variables are set:
 
 - **Discord**: Set `DISCORD_WEBHOOK_URL` → Discord enabled
+- **Slack**: Set `SLACK_WEBHOOK_URL` → Slack enabled
 - **Telegram**: Set `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` → Telegram enabled
 
 Enable as many as you need.

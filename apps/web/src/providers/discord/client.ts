@@ -1,7 +1,7 @@
 import { type Embed, Webhook } from "@vermaysha/discord-webhook";
 
 import { env } from "@/env";
-import { DEFAULT_AVATAR_URL } from "./consts";
+import { BOT_AVATAR, BOT_NAME } from "./consts";
 
 const RETRY_CONFIG = {
   maxRetries: 3,
@@ -15,8 +15,8 @@ export async function sendEmbed(embed: Embed): Promise<void> {
   }
 
   const hook = new Webhook(env.DISCORD_WEBHOOK_URL);
-  hook.setUsername(env.DISCORD_WEBHOOK_USERNAME || "Versend");
-  hook.setAvatarUrl(env.DISCORD_WEBHOOK_AVATAR_URL || DEFAULT_AVATAR_URL);
+  hook.setUsername(BOT_NAME);
+  hook.setAvatarUrl(BOT_AVATAR);
   hook.addEmbed(embed);
 
   await sendWithRetry(hook);

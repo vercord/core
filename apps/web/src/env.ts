@@ -7,11 +7,11 @@ export const env = createEnv({
     WEBHOOK_INTEGRATION_SECRET: string(),
     // Discord
     DISCORD_WEBHOOK_URL: string().url().optional(),
-    DISCORD_WEBHOOK_USERNAME: string().optional(),
-    DISCORD_WEBHOOK_AVATAR_URL: string().url().optional(),
     // Telegram
     TELEGRAM_BOT_TOKEN: string().optional(),
     TELEGRAM_CHAT_ID: string().optional(),
+    // Slack
+    SLACK_WEBHOOK_URL: string().url().optional(),
     // Rate limiting
     UPSTASH_REDIS_REST_URL: string().url().optional(),
     UPSTASH_REDIS_REST_TOKEN: string().optional(),
@@ -20,10 +20,9 @@ export const env = createEnv({
   runtimeEnv: {
     WEBHOOK_INTEGRATION_SECRET: process.env.WEBHOOK_INTEGRATION_SECRET,
     DISCORD_WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL,
-    DISCORD_WEBHOOK_USERNAME: process.env.DISCORD_WEBHOOK_USERNAME,
-    DISCORD_WEBHOOK_AVATAR_URL: process.env.DISCORD_WEBHOOK_AVATAR_URL,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
+    SLACK_WEBHOOK_URL: process.env.SLACK_WEBHOOK_URL,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   },

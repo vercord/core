@@ -1,4 +1,4 @@
 {
   "title": "Providers",
-  "pages": ["index", "discord", "telegram"]
+  "pages": ["index", "discord", "slack", "telegram"]
 }
