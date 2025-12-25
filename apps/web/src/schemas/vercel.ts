@@ -73,26 +73,49 @@ export const marketplaceInvoiceSchema = z
   .passthrough();
 
 // Webhook type enum with all supported event types from the documentation
+// @see https://vercel.com/docs/webhooks/webhooks-api
 export const webhookTypeEnum = z.enum([
   // Deployment events
-  "deployment.created",
-  "deployment.succeeded",
-  "deployment.ready",
-  "deployment.promoted",
   "deployment.canceled",
-  "deployment.error",
   "deployment.check-rerequested",
+  "deployment.cleanup",
+  "deployment.created",
+  "deployment.error",
   "deployment.integration.action.cancel",
   "deployment.integration.action.cleanup",
   "deployment.integration.action.start",
+  "deployment.promoted",
+  "deployment.ready",
+  "deployment.succeeded",
 
   // Domain events
   "domain.created",
+  "domain.auto-renew-changed",
+  "domain.certificate-add",
+  "domain.certificate-add-failed",
+  "domain.certificate-deleted",
+  "domain.certificate-renew",
+  "domain.certificate-renew-failed",
+  "domain.dns-records-changed",
+  "domain.renewal",
+  "domain.renewal-failed",
+  "domain.transfer-in-completed",
+  "domain.transfer-in-failed",
+  "domain.transfer-in-started",
+
+  // Project domain events
+  "project.domain-created",
+  "project.domain-deleted",
+  "project.domain-moved",
+  "project.domain-unverified",
+  "project.domain-updated",
+  "project.domain-verified",
 
   // Integration configuration events
   "integration-configuration.permission-upgraded",
   "integration-configuration.removed",
   "integration-configuration.scope-change-confirmed",
+  "integration-configuration.transferred",
 
   // Integration resource events
   "integration-resource.project-connected",
@@ -103,10 +126,19 @@ export const webhookTypeEnum = z.enum([
   "marketplace.invoice.notpaid",
   "marketplace.invoice.paid",
   "marketplace.invoice.refunded",
+  "marketplace.member.changed",
+
+  // Alerts
+  "alerts.triggered",
 
   // Project events
   "project.created",
   "project.removed",
+  "project.renamed",
+  "project.rolling-release.approved",
+  "project.rolling-release.completed",
+  "project.rolling-release.aborted",
+  "project.rolling-release.started",
 ]);
 
 // Main webhook schema based on Vercel's documentation

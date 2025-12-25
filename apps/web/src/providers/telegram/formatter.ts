@@ -10,6 +10,14 @@ const EMOJIS = {
   branch: "🌿",
   commit: "📝",
   url: "🌐",
+  cleanup: "🧹",
+  refresh: "🔄",
+  alert: "🚨",
+  certificate: "🔐",
+  transfer: "↔️",
+  verify: "✔️",
+  rename: "✏️",
+  member: "👤",
 } as const;
 
 type Formatter = (webhook: VercelWebhook) => string;
@@ -135,12 +143,36 @@ function formatGeneric(webhook: VercelWebhook): string {
 
 function getEmoji(state: string): string {
   const map: Record<string, string> = {
-    created: EMOJIS.pending,
+    // Success states
     succeeded: EMOJIS.success,
     ready: EMOJIS.success,
-    promoted: EMOJIS.promoted,
+    completed: EMOJIS.success,
+    approved: EMOJIS.success,
+    paid: EMOJIS.success,
+    verified: EMOJIS.verify,
+    renewal: EMOJIS.success,
+    // Error states
     error: EMOJIS.error,
+    failed: EMOJIS.error,
+    notpaid: EMOJIS.error,
+    // Pending/info states
+    created: EMOJIS.pending,
+    started: EMOJIS.pending,
+    // Canceled states
     canceled: EMOJIS.canceled,
+    aborted: EMOJIS.canceled,
+    removed: EMOJIS.canceled,
+    deleted: EMOJIS.canceled,
+    // Other states
+    promoted: EMOJIS.promoted,
+    cleanup: EMOJIS.cleanup,
+    triggered: EMOJIS.alert,
+    renamed: EMOJIS.rename,
+    transferred: EMOJIS.transfer,
+    moved: EMOJIS.transfer,
+    changed: EMOJIS.refresh,
+    updated: EMOJIS.refresh,
+    refunded: EMOJIS.info,
   };
   return map[state] || EMOJIS.info;
 }
