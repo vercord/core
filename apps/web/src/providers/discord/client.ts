@@ -10,6 +10,10 @@ const RETRY_CONFIG = {
 } as const;
 
 export async function sendEmbed(embed: Embed): Promise<void> {
+  if (!env.DISCORD_WEBHOOK_URL) {
+    throw new Error("Discord: DISCORD_WEBHOOK_URL is not configured");
+  }
+
   const hook = new Webhook(env.DISCORD_WEBHOOK_URL);
   hook.setUsername(env.DISCORD_WEBHOOK_USERNAME || "Vercord");
   hook.setAvatarUrl(env.DISCORD_WEBHOOK_AVATAR_URL || DEFAULT_AVATAR_URL);
