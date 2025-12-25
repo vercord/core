@@ -4,4 +4,4 @@ Vercel deployment notifications wherever you want. Self-hosted webhook relay.
 
 ## Docs
 
-[docs.versend.lol](https://docs.versend.lol)
+[docs.versend.io](https://docs.versend.io)

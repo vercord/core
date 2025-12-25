@@ -28,7 +28,7 @@ export default function Home() {
         {/* CTA */}
         <Link
           className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 font-medium text-background text-sm transition-colors hover:bg-foreground/90"
-          href="https://docs.versend.lol"
+          href="https://docs.versend.io"
           rel="noopener noreferrer"
           target="_blank"
         >

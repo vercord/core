@@ -20,7 +20,7 @@
     },
     "apps/fumadocs": {
       "name": "fumadocs",
-      "version": "0.0.3",
+      "version": "0.1.0",
       "dependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -48,7 +48,7 @@
     },
     "apps/web": {
       "name": "web",
-      "version": "0.0.3",
+      "version": "0.1.0",
       "dependencies": {
         "@radix-ui/react-slot": "^1.2.4",
         "@tanstack/react-form": "^1.27.6",
@@ -82,7 +82,7 @@
     },
     "packages/config": {
       "name": "@versend/config",
-      "version": "0.0.3",
+      "version": "0.1.0",
     },
   },
   "packages": {
